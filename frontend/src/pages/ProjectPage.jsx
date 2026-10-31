@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
-import { getProject, getTasks, createTask, updateTaskComplete, updateTask } from "../api";
+import {
+  getProject,
+  getTasks,
+  createTask,
+  updateTaskComplete,
+  updateTask,
+} from "../api";
 import "./project.css";
 
 export default function ProjectPage() {
@@ -9,6 +15,7 @@ export default function ProjectPage() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [formIssue, setFormIssue] = useState("");
 
   useEffect(() => {
     async function loadPage() {
@@ -41,13 +48,17 @@ export default function ProjectPage() {
     const name = formData.get("name");
     const desc = formData.get("desc");
 
-    try {
-      const newTasks = await createTask(projectId, name, desc);
-      setTasks(newTasks);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      form.reset();
+    if (name) {
+      try {
+        const newTasks = await createTask(projectId, name, desc);
+        setTasks(newTasks);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        form.reset();
+      }
+    } else {
+      setFormIssue("New tasks must be named.");
     }
   }
 
@@ -71,7 +82,7 @@ export default function ProjectPage() {
   if (!project) return <p>Project {projectId} not found...</p>;
 
   return (
-    <main class="project">
+    <main className="project">
       <Link to="/projects">view all projects</Link>
 
       <h1>{project.name}</h1>
@@ -108,6 +119,7 @@ export default function ProjectPage() {
           <input type="text" name="desc" />
           <button>submit</button>
         </form>
+        {formIssue ? <p>{formIssue}</p> : null}
       </section>
     </main>
   );

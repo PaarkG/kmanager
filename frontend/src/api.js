@@ -57,7 +57,7 @@ export async function createTask(projectId, name, desc) {
 }
 
 export async function updateTask(taskId, body) {
-  const response = await fetch (`${URL}/tasks/${taskId}`, {
+  const response = await fetch(`${URL}/tasks/${taskId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -66,9 +66,9 @@ export async function updateTask(taskId, body) {
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to update task ${taskId}`)
+    throw new Error(`Failed to update task ${taskId}`);
   }
-  return response
+  return response;
 }
 
 export async function updateTaskComplete(taskId, completed) {

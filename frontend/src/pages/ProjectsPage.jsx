@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { getProjects, createNewProject } from "../api";
+import "./projects.css";
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [formIssue, setFormIssue] = useState("");
 
   useEffect(() => {
     async function loadPage() {
@@ -33,13 +35,18 @@ export default function ProjectsPage() {
     const name = formData.get("name");
     const desc = formData.get("desc");
 
-    try {
-      const newProjects = await createNewProject(name, desc);
-      setProjects(newProjects);
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      form.reset();
+    if (name) {
+      setFormIssue("");
+      try {
+        const newProjects = await createNewProject(name, desc);
+        setProjects(newProjects);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        form.reset();
+      }
+    } else {
+      setFormIssue("New projects must be named.");
     }
   }
 
@@ -47,7 +54,7 @@ export default function ProjectsPage() {
   if (error) return <p>Error loading projects: {error}</p>;
 
   return (
-    <main>
+    <main className="projects">
       <h1>Projects</h1>
       {projects.length === 0 ? (
         <p>No projects yet...</p>
@@ -55,7 +62,10 @@ export default function ProjectsPage() {
         <ul>
           {projects.map((project) => (
             <li key={project.id}>
-              <a href={`/projects/${project.id}`}>{project.name}</a>
+              <a href={`/projects/${project.id}`}>
+                <h2>{project.name}</h2>
+                <p>{project.desc}</p>
+              </a>
             </li>
           ))}
         </ul>
@@ -69,6 +79,7 @@ export default function ProjectsPage() {
           <input type="text" name="desc" />
           <button>submit</button>
         </form>
+        {formIssue ? <p>{formIssue}</p> : null}
       </section>
     </main>
   );

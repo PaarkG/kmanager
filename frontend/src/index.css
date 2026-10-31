@@ -1,0 +1,21 @@
+@font-face {
+  font-family: Nabla;
+  src: url("./assets/fonts/Nabla-Regular-VariableFont_EDPT\,EHLT.ttf");
+}
+
+* {
+  font-family: Nabla, Georgia, "Times New Roman", Times, serif;
+  background-color: darkcyan;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+h2 {
+  font-weight: 500;
+}
+
+p {
+  font-weight: 200;
+}
