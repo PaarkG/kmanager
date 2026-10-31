@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router";
-import { getProject, getTasks, createNewTask, markTaskComplete } from "../api";
+import { getProject, getTasks, createTask, updateTaskComplete, updateTask } from "../api";
+import "./project.css";
 
 export default function ProjectPage() {
   const { projectId } = useParams();
@@ -41,7 +42,7 @@ export default function ProjectPage() {
     const desc = formData.get("desc");
 
     try {
-      const newTasks = await createNewTask(projectId, name, desc);
+      const newTasks = await createTask(projectId, name, desc);
       setTasks(newTasks);
     } catch (error) {
       setError(error.message);
@@ -53,7 +54,7 @@ export default function ProjectPage() {
   async function onTaskCheck(e) {
     const target = e.target;
     const taskId = target.name;
-    const newTask = await markTaskComplete(taskId, target.checked);
+    const newTask = await updateTaskComplete(taskId, target.checked);
     const newTasks = tasks.filter((t) => t.id != taskId);
     newTasks.push(newTask);
     newTasks.sort((t1, t2) => t1.id - t2.id);
@@ -70,11 +71,11 @@ export default function ProjectPage() {
   if (!project) return <p>Project {projectId} not found...</p>;
 
   return (
-    <main>
+    <main class="project">
       <Link to="/projects">view all projects</Link>
 
       <h1>{project.name}</h1>
-      <p>{project.description}</p>
+      <p>{project.desc}</p>
 
       <section>
         <h2>Tasks</h2>
@@ -85,7 +86,7 @@ export default function ProjectPage() {
           <ul>
             {tasks.map((task) => (
               <li key={task.id}>
-                <h2>{task.name}</h2>
+                <h3>{task.name}</h3>
                 <p>{task.desc}</p>
                 <input
                   type="checkbox"

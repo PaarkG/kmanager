@@ -39,7 +39,7 @@ export async function createNewProject(name, desc) {
   return response.json();
 }
 
-export async function createNewTask(projectId, name, desc) {
+export async function createTask(projectId, name, desc) {
   const response = await fetch(`${URL}/projects/${projectId}/tasks`, {
     method: "POST",
     headers: {
@@ -56,17 +56,23 @@ export async function createNewTask(projectId, name, desc) {
   return response.json();
 }
 
-export async function markTaskComplete(taskId, completed) {
-  const response = await fetch(`${URL}/tasks/${taskId}`, {
+export async function updateTask(taskId, body) {
+  const response = await fetch (`${URL}/tasks/${taskId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      completed: completed,
-    }),
+    body: JSON.stringify(body),
   });
 
+  if (!response.ok) {
+    throw new Error(`Failed to update task ${taskId}`)
+  }
+  return response
+}
+
+export async function updateTaskComplete(taskId, completed) {
+  const response = await updateTask(taskId, { completed: completed });
   if (!response.ok) {
     throw new Error(`Failed to mark task ${taskId} as complete`);
   }

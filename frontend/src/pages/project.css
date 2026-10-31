@@ -1,0 +1,43 @@
+.project {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project * {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.project section {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project h1 {
+    padding-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.project ul {
+    list-style: none;
+    margin: 5px;
+    padding: 0;
+    width: 60%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.project li {
+    border-radius: 5px;
+    border: 2px black solid;
+    width: auto;
+    box-sizing: border-box;
+}
