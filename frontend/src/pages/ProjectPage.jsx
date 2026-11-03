@@ -111,15 +111,13 @@ export default function ProjectPage() {
         )}
       </section>
       <section>
-        
+        <h2>new task</h2>
         <form onSubmit={onFormSubmit}>
-          <h2>new task</h2>
-
           <label>
             <span>name</span>
             <input type="text" name="name" />
           </label>
-          
+
           <label>
             <span />
             <span>desc</span>
@@ -127,7 +125,7 @@ export default function ProjectPage() {
             <input type="text" name="desc" />
             <span />
           </label>
-          
+
           <button>submit</button>
         </form>
         {formIssue ? <p>{formIssue}</p> : null}

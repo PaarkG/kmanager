@@ -12,23 +12,29 @@
   font-family: Pixelify, Nabla, Georgia, "Times New Roman", Times, serif;
 }
 
+body {
+  background-color: rgb(15, 138, 214);
+  margin: 0;
+  padding: 5px 5vh;
+}
+
 h1 {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 3rem;
 }
 
 h2 {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 2.5rem;
 }
 
 h3 {
-  font-weight: 400;
+  font-weight: 300;
   font-size: 2rem;
 }
 
 p {
-  font-weight: 200;
+  font-weight: 100;
 }
 
 input,
