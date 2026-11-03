@@ -3,19 +3,37 @@
   src: url("./assets/fonts/Nabla-Regular-VariableFont_EDPT\,EHLT.ttf");
 }
 
+@font-face {
+  font-family: Pixelify;
+  src: url("./assets/fonts/PixelifySans-VariableFont_wght.ttf");
+}
+
 * {
-  font-family: Nabla, Georgia, "Times New Roman", Times, serif;
-  background-color: darkcyan;
+  font-family: Pixelify, Nabla, Georgia, "Times New Roman", Times, serif;
 }
 
 h1 {
   font-weight: 600;
+  font-size: 3rem;
 }
 
 h2 {
   font-weight: 500;
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 2rem;
 }
 
 p {
   font-weight: 200;
+}
+
+input,
+button,
+label,
+p {
+  font-size: 1.5rem;
 }

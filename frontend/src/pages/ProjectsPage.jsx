@@ -73,10 +73,16 @@ export default function ProjectsPage() {
       <section>
         <h2>new project</h2>
         <form onSubmit={onFormSubmit}>
-          <label>name</label>
-          <input type="text" name="name" />
-          <label>desc</label>
-          <input type="text" name="desc" />
+          <label>
+            <span>name</span>
+            <input type="text" name="name" />
+          </label>
+          
+          <label>
+            <span>desc</span>
+            <input type="text" name="desc" />
+          </label>
+          
           <button>submit</button>
         </form>
         {formIssue ? <p>{formIssue}</p> : null}
